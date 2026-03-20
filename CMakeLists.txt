@@ -1,5 +1,9 @@
 project(hge_unix)
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.5)
+
+# Suppress warnings as errors
+set(CMAKE_C_FLAGS "-Wno-error -Wno-incompatible-pointer-types" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS "-Wno-error -Wno-incompatible-pointer-types -Wno-template-body -Wno-pointer-type-mismatch" CACHE STRING "" FORCE)
 
 option(BUILD_TUTORIALS "Build the tutorial samples" OFF)
 option(BUILD_TOOLS "Build the library tools" OFF)
@@ -60,7 +64,7 @@ if(UNIX OR APPLE)
 		${PNG_LIBRARY}
 	)
 
-	set(USE_SHARED SHARED)
+	set(USE_SHARED STATIC)
 elseif(WIN32)
 	# Windows
 	add_definitions(-D_WINDOWS -D_WIN32)

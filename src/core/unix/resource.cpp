@@ -8,7 +8,7 @@
 
 #include "hge_impl.h"
 
-#include <zlib.h>  // the system version is better here. HGE's is out of date.
+//#include <zlib.h>  // the system version is better here. HGE's is out of date.
 
 #define NOCRYPT
 //#define NOUNCRYPT

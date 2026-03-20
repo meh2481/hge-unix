@@ -99,8 +99,8 @@ void fill_fopen_filefunc(zlib_filefunc_def *pzlib_filefunc_def)
   pzlib_filefunc_def->zopen_file = fopen_file_func;
   pzlib_filefunc_def->zread_file = fread_file_func;
   pzlib_filefunc_def->zwrite_file = fwrite_file_func;
-  pzlib_filefunc_def->ztell_file = ftell_file_func;
-  pzlib_filefunc_def->zseek_file = fseek_file_func;
+  pzlib_filefunc_def->ztell_file = (unsigned int (*)(void *, void *))ftell_file_func;
+  pzlib_filefunc_def->zseek_file = (unsigned int (*)(void *, void *, unsigned int,  int))fseek_file_func;
   pzlib_filefunc_def->zclose_file = fclose_file_func;
   pzlib_filefunc_def->zerror_file = ferror_file_func;
   pzlib_filefunc_def->opaque = NULL;

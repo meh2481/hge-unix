@@ -70,8 +70,20 @@
 #include <tchar.h>
 #endif
 
+#ifdef __cplusplus
+#undef min
+#undef max
+#endif
+
 #include <stdio.h>
 #include <math.h>
+
+#ifndef min
+#define min(a,b) (((a)<(b))?(a):(b))
+#endif
+#ifndef max
+#define max(a,b) (((a)>(b))?(a):(b))
+#endif
 
 #ifdef __BORLANDC__
 
