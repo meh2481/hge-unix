@@ -167,7 +167,7 @@ void hgeParticleSystem::_update(float fDeltaTime)
 		par->vecVelocity += (vecAccel+vecAccel2)*fDeltaTime;
 		par->vecVelocity.y += par->fGravity*fDeltaTime;
 
-		par->vecLocation += par->vecVelocity;
+		par->vecLocation += par->vecVelocity * 0.015;    //MEH This is off by about a factor of 100 for some strange reason
 
 		par->fSpin += par->fSpinDelta*fDeltaTime;
 		par->fSize += par->fSizeDelta*fDeltaTime;
@@ -239,7 +239,7 @@ void hgeParticleSystem::MoveTo(float x, float y, bool bMoveParticles)
 {
 	int i;
 	float dx,dy;
-	
+
 	if(bMoveParticles)
 	{
 		dx=x-vecLocation.x;
@@ -281,7 +281,7 @@ void hgeParticleSystem::Fire()
 void hgeParticleSystem::Stop(bool bKillParticles)
 {
 	fAge=-2.0f;
-	if(bKillParticles) 
+	if(bKillParticles)
 	{
 		nParticlesAlive=0;
 		rectBoundingBox.Clear();

@@ -1294,7 +1294,16 @@ bool HGE_Impl::_GfxInit()
 	if (!_LoadOpenGLEntryPoints())
 		return false;   // already called _PostError().
 
-	nScreenBPP=SDL_GetWindowSurface((SDL_Window*)hwnd)->format->BitsPerPixel;
+	SDL_Surface *windowSurface = SDL_GetWindowSurface((SDL_Window*)hwnd);
+	if (windowSurface && windowSurface->format)
+		nScreenBPP = windowSurface->format->BitsPerPixel;
+	else
+	{
+		const Uint32 pixelFormat = SDL_GetWindowPixelFormat((SDL_Window*)hwnd);
+		const int bpp = SDL_BITSPERPIXEL(pixelFormat);
+		nScreenBPP = (bpp > 0) ? bpp : 32;
+		System_Log("OpenGL: SDL_GetWindowSurface() unavailable, using window pixel format BPP=%d", nScreenBPP);
+	}
 
 	_AdjustWindow();
 
